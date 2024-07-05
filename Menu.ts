@@ -1,49 +1,40 @@
 import readlinesync = require("readline-sync");
 import { colors } from './src/util/Colors';
-import { Conta } from "./src/util/model/Conta";
+import { Conta } from './src/util/model/Conta';
+import { ContaCorrente } from './src/util/model/ContaCorrente';
+import { ContaPoupanca } from './src/util/model/ContaPoupanca';
 
 export function main() {
 
     let opcao: number;
+    
+   // Objeto da Classe Conta (Teste)
+    const conta: Conta = new Conta(1, 123, 1, "Arthur", 10000);
+    conta.visualizar();
+    conta.sacar(10500);
+    conta.visualizar();
+    conta.depositar(5000);
+    conta.visualizar();
 
-    //Novas Instâncias da Classe Conta (Objetos)
-    const c1: Conta = new Conta(1, 1234, 1, 'Júlia Castro', 800000.00);
-    const c2: Conta = new Conta(2, 1234, 2, 'Marcella Sanches', 600000.00);
+   // Objeto da Classe ContaCorrente (Teste)
+    const contacorrente: ContaCorrente = new ContaCorrente(2, 123, 1, "Enzo", 15000, 1000);
+    contacorrente.visualizar();
+    contacorrente.sacar(2000);
+    contacorrente.visualizar();
+    contacorrente.depositar(1000);
+    contacorrente.visualizar();
 
-    // Visualizando os dados da Conta c1
-    c1.visualizar();
-
-    // Visualizando os dados da Conta c2
-    c2.visualizar();
-
-    // Visualizando o Saldo da Conta c1
-    console.log(`\nO Saldo da conta 01 é: ${c1.saldo}`);
-
-    // Alterando o Saldo da Conta c2
-    c2.saldo = 900000.00;
-
-    // Visualizando o Saldo da Conta c2, depois de atualizar o valor
-    console.log(`\nO Saldo da conta 02 é: ${c2.saldo}`);
-
-    // Saque nas Contas
-    console.log(`\nSacar 100.00 Reais da Conta C1: ${c1.sacar(100)}`); // true
-    c1.visualizar();
-
-    console.log(`\nSacar 1000000.00 Reais da Conta C2: ${c2.sacar(1000000)}`); // false
-    c2.visualizar();
-
-    // Depósito nas Contas
-    console.log(`\nDepositar 200000.00 Reais da Conta C1: `); 
-    c1.depositar(200000)
-    c1.visualizar();
-
-    console.log(`\nDepositar 300000.25 Reais da Conta C2: `); 
-    c2.depositar(300000.25)
-    c2.visualizar();
+    // Objeto da Classe ContaPoupanca (teste)
+    const contapoupanca: ContaPoupanca = new ContaPoupanca(3, 123, 2, "Vanda", 1000, 10);
+    contapoupanca.visualizar();
+    contapoupanca.sacar(200);
+    contapoupanca.visualizar();
+    contapoupanca.depositar(1000);
+    contapoupanca.visualizar();
 
     while (true) {
 
-        console.log(colors.bg.black, colors.fg.green,
+        console.log(colors.bg.black, colors.fg.yellow, 
                     "*****************************************************");
         console.log("                                                     ");
         console.log("                BANCO DO BRAZIL COM Z                ");
@@ -61,15 +52,13 @@ export function main() {
         console.log("            9 - Sair                                 ");
         console.log("                                                     ");
         console.log("*****************************************************");
-        console.log("                                                     ",
-            colors.reset);
+        console.log("                                                     ", colors.reset);
 
         console.log("Entre com a opção desejada: ");
         opcao = readlinesync.questionInt("");
 
         if (opcao == 9) {
-            console.log(colors.fg.greenstrong,
-                "\nBanco do Brazil com Z - O seu Futuro começa aqui!");
+            console.log(colors.fg.greenstrong, "\nBanco do Brazil com Z - O seu Futuro começa aqui!");
             sobre();
             console.log(colors.reset, "");
             process.exit(0);
@@ -77,56 +66,47 @@ export function main() {
 
         switch (opcao) {
             case 1:
-                console.log(colors.fg.whitestrong,
-                    "\n\nCriar Conta\n\n", colors.reset);
-
+                console.log(colors.fg.whitestrong, "\n\nCriar Conta\n\n", colors.reset);
+                
                 keyPress()
                 break;
             case 2:
-                console.log(colors.fg.whitestrong,
-                    "\n\nListar todas as Contas\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nListar todas as Contas\n\n", colors.reset);
 
                 keyPress()
                 break;
             case 3:
-                console.log(colors.fg.whitestrong,
-                    "\n\nConsultar dados da Conta - por número\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nConsultar dados da Conta - por número\n\n", colors.reset);
 
                 keyPress()
                 break;
             case 4:
-                console.log(colors.fg.whitestrong,
-                    "\n\nAtualizar dados da Conta\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nAtualizar dados da Conta\n\n", colors.reset);
 
                 keyPress()
                 break;
             case 5:
-                console.log(colors.fg.whitestrong,
-                    "\n\nApagar uma Conta\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nApagar uma Conta\n\n", colors.reset);
 
                 keyPress()
                 break;
             case 6:
-                console.log(colors.fg.whitestrong,
-                    "\n\nSaque\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nSaque\n\n", colors.reset);
 
                 keyPress()
                 break;
             case 7:
-                console.log(colors.fg.whitestrong,
-                    "\n\nDepósito\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nDepósito\n\n", colors.reset);
 
                 keyPress()
                 break;
             case 8:
-                console.log(colors.fg.whitestrong,
-                    "\n\nTransferência entre Contas\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nTransferência entre Contas\n\n", colors.reset);
 
                 keyPress()
                 break;
             default:
-                console.log(colors.fg.whitestrong,
-                    "\nOpção Inválida!\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\nOpção Inválida!\n", colors.reset);
 
                 keyPress()
                 break;
